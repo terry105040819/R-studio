@@ -1,0 +1,17 @@
+#see the data detail
+summary(data)
+
+#看年齡層個數與比例
+prop.table(table(data2$年齡層))
+age <- table(data2$年齡層)
+cbind(age,prop.table(age))
+
+＃看性別個數與比例
+prop.table(table(data2$性別))
+gender <- table(data2$性別)
+cbind(gender,prop.table(gender))
+
+＃看性別與年齡個數與比例
+prop.table(table(data2$性別,data2$年齡層))
+gender_age <- table(data2$性別,data2$年齡層)
+cbind(gender_age,prop.table(gender_age))
