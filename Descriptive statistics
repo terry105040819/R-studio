@@ -1,0 +1,24 @@
+#看數據的細節
+summary(data)
+#提取發病周別＝10的data
+data_week10 <- data[data$發病周別==10,]
+
+#看各年齡層佔整體比例
+prop.table(table(data_week10$年齡層))
+#將table(data_week10$年齡層)設為age這個value
+age <- table(data_week10$年齡層)
+#看年各齡層佔整體比例與個案數
+cbind(age,prop.table(age))
+
+#看性別比例(Total=1)not percentage
+prop.table(table(data_week10$性別))
+#將table(data_week10$性別)設為gender這個value
+gender <- table(data_week10$性別)
+#看性別佔整體比例與個案數
+cbind(gender,prop.table(gender))
+
+#結合上述兩種條件
+prop.table(table(data_week10$性別,data_week10$年齡層))
+gender_age <- table(data_week10$性別,data_week10$年齡層)
+cbind(gender_age,prop.table(gender_age))
+
