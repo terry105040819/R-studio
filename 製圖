@@ -1,0 +1,38 @@
+#直方圖(histogram)-hist()#限數值
+hist(data$特定資料,main＝title,xlab=x軸數值,ylab=y軸數值)
+
+#盒鬚圖(box plox)-boxplot()ㄕ
+boxplot(確定病例數～年齡層,data)#y軸資料一定要數值,x軸資料可以為文字
+boxplot(formula=y軸數值～x軸數值,data,xlab="發病周別",ylab="確定病例數",col="grey"(顏色))
+
+#散佈圖
+plot(x=data$發病週別,y=data$確定病例數,main="發病周別與確定病例數關係",xlab="發病周別",ylab="確定病例數",pch=5,col="black")
+
+#同時畫兩張圖
+par(mfrow=c(1,2))
+plot(data$發病週別,data$確定病例數,main="地區一")
+plot(data$發病週別,data$發病年份,main="地區二")
+
+#安裝ggplot2
+install.packages("ggplot2")
+library(ggplot2)
+#ggplot2(較精美的繪圖方法)
+ggplot(x,y,group,....)+geom-object()+theme()
+#直方圖
+ggplot(data,aes(x=年齡層),stat="bin")+geom_bar(fill="red",col="blue")+ggtitle("年齡層")
+#ggplot(要選取資料,aes(x=x軸欄位名稱),stat="bin"+geom()
+#散佈圖
+ggplot(data,aes(x=年齡層,y=發病周別)+geom_point(col="black"）
+
+
+#安裝MASS
+install.packages("MASS")                                         
+library("MASS"）
+卡方檢定----適用形檢測
+
+#獨立性檢定(test of independence)---用於兩個變數的獨立檢定,看兩個變數是否有相關
+gender_age <-na.omit(subset(data.select=c(性別,年齡層)))
+head(gender_age)
+ggplot(gender_age,aes(x=年齡層,fill=性別))+geom_bar(position="dodge")
+gender_age.table <- table(gender_age$年齡層,gender_age$性別)
+chisq.test(gender_age.table)
