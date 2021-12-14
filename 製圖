@@ -36,3 +36,20 @@ head(gender_age)
 ggplot(gender_age,aes(x=年齡層,fill=性別))+geom_bar(position="dodge")
 gender_age.table <- table(gender_age$年齡層,gender_age$性別)
 chisq.test(gender_age.table)
+
+
+B <- as.data.frame(table(A$V1), stringsAsFactors = F)
+C <- as.data.frame(strsplit(x = B[,1], split = '\\|'), stringsAsFactors = F)
+B[,1] <- as.vector(t(C[2,]))
+B[,1] <- sub(x = B[,1], pattern = '\\*.*', replacement = '')
+C <- as.data.frame(table(B[,1]), stringsAsFactors = F)
+A <- as.data.frame(matrix(data = 0, nrow = 1, ncol = 1))
+for(i in 1:nrow(C))
+{
+  D <- C[i,1]
+  D <- B[B$Var1 %in% D,]
+  D[1,2] <- colSums(as.matrix(D[1:nrow(D),2]))
+  A[i,1:2] <- D[1,1:2]
+}
+A$pro <- round(A[,2]/colSums(as.matrix(A$Freq))*100, digits = 3)
+A <- A[order(A$pro, decreasing = T),]
