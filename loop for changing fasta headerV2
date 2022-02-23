@@ -1,0 +1,63 @@
+#匯入檔案
+flu <- read.delim(file = '/media/eric/Expansion/Terry/H5HA/all/all_HA.fasta', header = F)
+
+#grep(抓取)fluV1中含有>符號的字串,value=T顯示出字串樣式
+header <- grep(x =flu$V1, pattern = '^>', value = T)
+
+#將header中的/裁切
+header_split <- strsplit(header, split = '/')
+
+#預先建立header_new這個變數
+header_new <- ''
+
+#for loop
+for(i in seq_len(length(header)))#重複迴圈次數#seq_len(length(chr)確認字串長度
+{
+  he <- header_split[[i]]#將header_split的第i個list設成he
+  A <- unlist(strsplit(he, split = '\\|'))#將he中的｜行裁切,＼＼為逃脫字元,unlist為解除將原本list格式解除
+  serires <- grep(A, pattern = '^EPI', value = T)#將A這個chr中的EPI抓取出來,value=顯示完整字串
+  country <- A[3] #將A這個chr中的第三個元素抓出
+  date <- grep(A, pattern = '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', value = T) ＃抓日期,^[0-9]{4}-[0-9]{2}-[0-9]{2}$為日期格式＄為結束抓取,value=T 顯示完整字串
+  ha <- A[(grep(A, pattern = '^EPI')+1)] #抓取A這個chr中含有EPI後面那個元素
+  header_new[i] <- paste('>' , serires, 'flu', country ,date[1], ha, sep = '|') #黏貼,將重新定義的chr進行黏貼,用｜作為分割
+  # B[[i]] <- date
+}
+# >|EPI_ISL_8785|H5N7|DE|2004-05-17|HA
+
+Terry: >|EPI_ISL_8785|flu|DE|2004-05-17|[number before EPI]
+
+Eunis: >|[animal]|EPI_ISL_8785|flu|DE|2004-05-17|
+
+# C <- as.data.frame(matrix(data = '', nrow = 0, ncol = 0))
+# for(i in seq_along(B))
+# {
+#   if(length(B[[i]])==2){
+#     print(i)
+#   }
+# }
+# 
+# C <- as.data.frame(C)
+# C$legnth <- nchar(C[,1])
+
+flu[grep(x =flu$V1, pattern = '^>'), 1] <- header_new
+write.table(x = flu, file = '/media/eric/Expansion/Terry/H5HA/all/flu_edited.fasta'
+            , quote = F, row.names = F, col.names = F)
+
+
+
+
+flu <- read.delim(file = '/media/eric/Expansion/Terry/H5HA/all/all_HA.fasta', header = F)
+head(flu)
+header <- grep(x =flu$V1, pattern = '^>', value = T)
+
+header_split <- strsplit(header, split = '/')
+header_new <- ''
+header_1 <- list()
+for(i in seq_len(length(header)))
+{
+  he <- header_split[[i]]
+  header_1[[i]] <- unlist(strsplit(he, split = '\\|'))
+  
+  # header_new[i] <- paste('>' ,header_1[[5]][4], 'flu'
+  #                        , header_1[[3]],header_1[[5]][2], header_1[[5]][5], sep = '|')
+}
