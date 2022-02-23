@@ -1,0 +1,18 @@
+H5N7 <- read.delim(file = '/media/eric/Expansion/Terry/H5HA/all/H5N7.fasta', header = F)
+header <- grep(x =H5N7$V1, pattern = '^>', value = T)
+
+header_split <- strsplit(header, split = '/')
+
+header_new <- ''
+seq_len(length(header_1))
+for(i in seq_len(length(header)))
+{
+  he <- header_split[[i]]
+  header_1 <- strsplit(he, split = '\\|')
+  header_new[i] <- paste('>' ,header_1[[5]][4], 'H5N7'
+                      , header_1[[3]],header_1[[5]][2], header_1[[5]][5], sep = '|')
+}
+
+H5N7[grep(x =H5N7$V1, pattern = '^>'),] <- header_new
+write.table(x = H5N7, file = '/media/eric/Expansion/Terry/H5HA/all/H5N7_edited.fasta'
+            , quote = F, row.names = F, col.names = F)
