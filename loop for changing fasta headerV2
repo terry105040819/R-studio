@@ -22,11 +22,7 @@ for(i in seq_len(length(header)))#重複迴圈次數#seq_len(length(chr)確認�
   header_new[i] <- paste('>' , serires, 'flu', country ,date[1], ha, sep = '|') #黏貼,將重新定義的chr進行黏貼,用｜作為分割
   # B[[i]] <- date
 }
-# >|EPI_ISL_8785|H5N7|DE|2004-05-17|HA
-
-Terry: >|EPI_ISL_8785|flu|DE|2004-05-17|[number before EPI]
-
-Eunis: >|[animal]|EPI_ISL_8785|flu|DE|2004-05-17|
+# >|EPI_ISL_8785|H5N7|DE|2004-05-17|HA #查看更改樣式
 
 # C <- as.data.frame(matrix(data = '', nrow = 0, ncol = 0))
 # for(i in seq_along(B))
