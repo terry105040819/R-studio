@@ -1,0 +1,30 @@
+upset(
+    data, genres,
+    base_annotations=list('Intersection size'=intersection_size(counts=FALSE),text=list(vjust=-0.1,hjust=-0.1,angle=45),
+    min_size=10,
+    width_ratio=0.1,
+    themes=upset_default_themes(text=element_text(size=30))
+)
+
+
+
+
+
+upset(movies,genres,
+  base_annotations=list(
+    'Intersection size'=intersection_size(
+      text=list(
+        vjust=-0.1,
+        hjust=-0.1,
+        angle=45),
+      text_colors=c(
+        on_background='brown', on_bar='yellow'))
+    + annotate(
+      geom='text', x=Inf, y=Inf,
+      label=paste('Total:', nrow(movies)),
+      vjust=1, hjust=1
+    )
+    + ylab('Intersection size')),
+  min_size=10,
+  width_ratio=0.1
+)
