@@ -1,0 +1,12 @@
+require(seqinr) 
+a = read.fasta('/home/terry/Desktop/tree_prototype/0223V2.fasta')
+a_seq = getSequence(a) 
+a_id = attritubes(a)$name
+a_id = attritubes(a)$names 
+strains = c( flu1, flu2 …) 
+m = match( a_id, strains) 
+m = match( a_id, strains)
+out_a = a_id[m] 
+ou_seq = a_seq[m]
+m = match(strains, a_id)
+write.fasta( out_seq, out_id, “new.fasta”)
