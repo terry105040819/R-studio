@@ -1,0 +1,32 @@
+change_fastaheader <- function(data.frame, class, path=getwd(), prefix=''){
+data <- data.frame
+header <- grep(data$V1, pattern = '^>', value = T)
+header_split <- strsplit(header, split = '/')
+header_new <- ''
+for(i in seq_len(length(header)))
+{
+  he <- header_split[[i]]
+  A <- unlist(strsplit(he, split = '\\|'))
+  ID <- grep(A, pattern = '^EPI', value = T)
+  Number <- A[7]
+  Species <- A[2]
+  Country <- A[3] 
+  Date <- grep(A, pattern = '^[0-9]{4}-[0-9]{2}-[0-9]{2}$', value = T)
+  Segment <- A[(grep(A, pattern = '^EPI')+1)] 
+  header_new[i] <- paste('>' , ID, Number ,Species ,Country ,Date ,Segment ,sep = '|')
+  data[grep(x =data$V1, pattern = '^>'), 1] <- header_new
+  write.table(x = data, file = path, prefix, '.fasta'
+              , quote = F, row.names = F, col.names = F)
+}
+  library(seqinr)
+  fa_path ='path'
+  fa_in =read.fasta(fa_path)
+  fa_in_seq = getSequence(fa_in)
+  fa_in_name = attributes(fa_in)$names
+  da_in_seq[[1]]
+  duplicated(fa_in_name,incomparables = TRUE)
+  fa_in_name1 <- unique(fa_in_name)
+  duplicated(fa_in_name1,incomparables = TRUE)
+  dup = which(duplicated(fa_in_name))
+  write.fasta(fa_in_seq[-dup],fa_in_name[-dup],path)
+  }
