@@ -53,3 +53,66 @@ for(i in 1:nrow(C))
 }
 A$pro <- round(A[,2]/colSums(as.matrix(A$Freq))*100, digits = 3)
 A <- A[order(A$pro, decreasing = T),]
+
+
+library(ggplot2) 
+library(readxl)
+library(lubridate)
+library(dplyr)
+data <- read.csv('/home/terry/Desktop/Empress-iraw_Avian_Influenza_H5.csv')
+
+
+Date <- data$Date_Years
+subtype <- data$Serotype
+ <- data$cal
+
+ggplot(data)+
+  geom_line(aes(x=Date,y=obs),color='red')+
+  geom_line(aes(x=Date,y=cal),color='blue')+
+  ylim(0,120)+scale_x_continuous(date)+labs(x='Date',y='PMf',title = 'Cal by Gaussian')
+
+ggplot(data)+geom_line(aes(x=Date,y=subtype),color='red')
++ylim(0,120)+scale_x_continuous(date)+labs(x='Date',y='PMf',title = 'Cal by Gaussian')
+
+ggplot(data,aes(x=Date,y=cal))+
+  geom_line(colour='red')+geom_point(shape=22)+
+  ylim(0,120)+ylab('PMF')+xlab('Date')  
+
+ggplot(data,aes(x=Date,y=index))+
+  geom_line(colour='blue')+geom_point(shape=22)
+
+par(new=TRUE)
+
+
+date_1 <- data_2$date
+data_2$date <- as.Date(data_2$date,'%Y-%m-%d')
+type <- data_2$type
+index <- data_2$index
+
+data_2 <- read_excel('/home/terry/Desktop/April_pmf_2.xlsx')
+ggplot(data_2,aes(x=date_1,y=index,group=type,color=type))+geom_line(size=1.5)+geom_point(size=2,color='black')+ylim(0,120)+labs(x='Date',y='PMf',title = 'Cal by Gaussian')+
+  element_text(size = 3)
+
+
+#############################################################
+#test MSE　between obs can  cal
+
+#test MSE
+
+diff=c(data$obs,data$cal)
+
+MAE_diff=mean(abs(diff))
+
+MSE_diff=mean(diff^2)
+
+
+library(readxl)
+data <- read_excel('/home/terry/Desktop/April_pmf.xlsx')
+my_data <- lm(obs~cal,data)
+MSE <- mean(my_data$residuals^2)
+MSE
+
+
+ggplot(data,aes(x=Date, y= , color=subtype))+geom_line()
+ggplot(data, aes(x=Date, fill=subtype))+geom_histogram(count)
+
