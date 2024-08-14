@@ -1,8 +1,0 @@
-#for迴圈
-for(i in x){#每次要執行的程式}
-for(month in month.name){print(month)}
-
-#while迴圈
-while(某種條件){#每次要執行的程式)
-i <- 1
-while(i<13){print(month.name[1])i<-i+1}
