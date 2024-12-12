@@ -1,7 +1,7 @@
 random_sampling <- function(sampling_file,output_dir,sampling_loop_times,reads_in_file){
   for (i in 1:sampling_loop_times ){
-    test <- ''
-    test[[i]] <- as.list(i)
-    test[[i]]<- sampling_file[sample(nrow(sampling_file),reads_in_file),]
+    Subset <- ''
+    Subset[[i]] <- as.list(i)
+    Subset[[i]]<- sampling_file[sample(nrow(sampling_file),reads_in_file),]
     write_fasta(Igblastdata = test[[i]],pwd = output_dir, file_name = i)
   }}
